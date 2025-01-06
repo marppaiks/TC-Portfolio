@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="TemplateMo">
+
+        <title>TC Portfolio - Infrastructure</title>
+        <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+        <link href="css/magnific-popup.css" rel="stylesheet">
+
+        <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,600,0,0&icon_names=arrow_back" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
+<!--
+
+TemplateMo 578 First Portfolio
+
+https://templatemo.com/tm-578-first-portfolio
+
+-->
+    </head>
+    
+    <body>
+
+        <section class="preloader">
+            <div class="spinner">
+                <span class="spinner-rotate"></span>    
+            </div>
+        </section>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a href="index.html" style="color: black;" class="navbar-brand mx-auto mx-lg-0 press-start-2p-regular">Marianne Äikäs</a>
+
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-5">
+                        <li class="nav-item">
+                            <a style="color: black; font-size: x-large;" class="nav-link click-scroll" href="/index.html#section_3">                   <i style="display: inline; font-size: large;" class="material-symbols-outlined">
+                                arrow_back
+                            </i>Go Back</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+        <main>
+            <section class="about section-padding">
+                <div class="container">
+                    
+
+                        <div class="mt-5 mt-lg-0">
+                            <div class="about-thumb" style="text-align: justify;">
+
+                                <h3 class="pt-2 mb-3 press-start-2p-regular pb-5">AWS Cloud</h3>
+                                <h4>AWS Cloud Infrastructure with CI/CD Pipeline</h4>
+
+                                <p>
+                                    <a href="images/portfolio_Elli_infra2.drawio.png" class="popup-image">
+                                        <img src="images/portfolio_Elli_infra2.drawio.png" class="img-fluid" alt="AWS Infrastructure pictured with Draw.io">
+                                        AWS Infrastructure pictured with Draw.io
+                                    </a>
+                                </p>
+                                <br>
+                                <h5>Overview</h5>
+                                <p>Elli application is made with Angular using Express and MongoDB Atlas as its database. The deployment to the cloud happens with AWS Elastic Beanstalk.</p>
+
+                                <p>Very shortly explained how this configuration works when an user is trying to reach the app:</p>
+                                <ul style="list-style-type: none; ">
+                                    <li>1. The user types in the URL address of the application/site</li>
+                                    <li>2. The Load balancer will re-route the HTTP traffic to HTTPS</li>
+                                    <li>3. The Load balancer will route the user's traffic to a healthy instance</li>
+                                    <li>4. If there are no healthy intances or there are not enough instances to match the traffic size, the Auto scaling group will create more instances if needed. This will also work, if the latency is too great, even if the instance is healthy.</li>
+                                    <li>5. The user encounters the login page. The page is not viewable unless you log in to it. When the user types in username and password, the login is connected to the database where the information can be verified from.</li>
+                                </ul>
+
+                                <a href="images/login2.png" class="popup-image">
+                                    <img src="images/login2.png" style="height: 30rem;" class="img-fluid" alt="Login screen">
+                                </a>
+                                <br>
+                                <br>
+                                <p>The development process has been set up in a way that uses variables that allow the same code to be developed locally and for the cloud. This means that when Github deployment is being done, the node_environment variable will get the value of either "production" or "development". Depending on these options, the deployment code changes accordingly. The code is stored in a Github repository in which all our developers have access to.
+                                There are many branches in the repository, but the main branches that connect to the infrastructure are <b>main</b>
+                                and <b>AWS-Elli. </b>These branches have Github actions workflows set up so they can automatically be tested (e2e)
+                                and deployed to the cloud if the tests pass successfully. The main branch will deploy to the main cloud environment, when AWS-Elli branch will deploy to the test environment.</p>
+
+                                <a href="images/urls.png" class="popup-image">
+                                    <img src="images/urls.png" class="img-fluid" alt="Code snip">
+                                </a>
+                                <br>
+                                <br>
+                                <h5>Key Components</h5>
+                                <p><b>Elastic Beanstalk</b> Automatically provisions and configures AWS resources such as EC2 instances, load balancers, Auto Scaling groups, and security groups. Creates and uses IGW automatically. In our configuration, there is one "top-level" application named "Elli_Project" and that has multiple environments under it.</p>
+
+                                <p><b>S3</b> bucket will be created automatically in the first deployment process, but the following deployments will use this same bucket to store the deployment zip package. It is automatically set to private and has no outside access. Basically, S3 bucket will just be used to upload the deployment zip package so that EBS can use it.</p>
+
+                                <p><b>IAM</b> is used to configure the EC2 instance profile that EBS uses to launch the needed instances. We also create a IAM user that the Github Actions can use to deploy.</p>
+
+                                <p><b>Certificate Manager</b> is used for the storage of the SSL certificates. It allows the EBS configuration to easily use the SSL certificates when attaching it to the load balancer.</p>
+
+                                <p>The application uses <b>MongoDB Atlas</b> as outsourced database. MongoDB Atlas is fully managed database service in the cloud. MongoDB's connection flows through the internet gateway, which allows it to communicate with the ec2 instances. <i>To make this more secure, we could have configured a VPN peering connection here.</i></p>
+                            
+                                <p>The EBS deployment will use one VPC but separate the MAIN and TEST environments to different availability zones. These zones have their own subnet that the EC2 instance runs in. The Auto Scaling group would handle setting up new instances in the same subnet if needed, but in our configuration, we have limited the instance count to 1 due to financial reasons.</p>
+
+                                <p><i>This development environment version requires that you have AWS Account and you have created and configured the Elastic Beanstalk Application and its environments beforehand.</i></p>
+                                <br>
+                                <br>
+                                <br>
+                                <h5>IAM and security</h5>
+                                <p>Elastic beanstalk will automatically create needed roles that it uses. However, there are some roles and policies that need to be configured manually.</p>
+
+                                <p><b>ec2-beanstalk-role</b> is an instance profile that the service <i>aws-elasticbeanstalk-service-role</i> uses.</p>
+                                <p>Permission policies include:</p>
+                                <ul>
+                                    <li>AWSElasticBeanstalkEnhancedHealth</li>
+                                    <li>AWSElasticBeanstalkMulticontainerDocker</li>
+                                    <li>AWSElasticBeanstalkRoleWorkerTier</li>
+                                    <li>AWSElasticBeanstalkWebTier</li>
+                                    <li>AWSElasticBeanstalkWorkerTier</li>
+                                </ul>
+
+                                <p><b>IAM User GitWorkflow</b> needs to be created for the Github Actions workflows. This user’s AWS_ACCESS_KEY and AWS_SECRET_ACCESS_KEY need to be passed to Github Secrets. Permissions that need to be included are:</p>
+                                <ul>
+                                    <li>AWSCloudFormationFullAccess</li>
+                                    <li>AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy</li>
+                                    <li>AWSElasticBeanstalkWebTier</li>
+                                    <li>SecretsManagerReadWrite</li>
+                                </ul>
+
+                                <p>There are also two more policies that need to be created manually.</p>
+                                <p><b>AllowCreateBucket</b></p>
+                                <pre>
+                                    <code>
+                                        {
+                                            "Version": "2012-10-17",
+                                            "Statement": [
+                                                {
+                                                    "Sid": "VisualEditor0",
+                                                    "Effect": "Allow",
+                                                    "Action": "s3:CreateBucket",
+                                                    "Resource": "Insert ARN of your S3 bucket here"
+                                                }
+                                            ]
+                                        }
+                                        
+                                    </code>
+                                </pre>
+                                <br>
+                                <p><b>EBS_for_Github</b></p>
+                                <pre>
+                                    <code>
+                                        {
+                                            "Version": "2012-10-17",
+                                            "Statement": [
+                                                {
+                                                    "Effect": "Allow",
+                                                    "Action": [
+                                                        "elasticbeanstalk:UpdateEnvironment",
+                                                        "elasticbeanstalk:DescribeEnvironments",
+                                                        "elasticbeanstalk:DescribeApplicationVersions"
+                                                    ],
+                                                    "Resource": "*"
+                                                }
+                                            ]
+                                        }
+                                        
+                                        
+                                    </code>
+                                </pre>
+
+                                <h5>S3 Bucket policy</h5>
+                                <p>Since the Github Action will upload a new zip file to the bucket every time it deploys, we want to create a lifecycle policy that deletes the old zip files after certain amount of time. The zip files are not needed anymore after the deployment has finished. The bucket’s policy needs to be configured in S3 dashboard and modify the JSON policy as needed.</p>
+
+                                <h5>Github</h5>
+                                <p>Since Github is a central part of the software’s development pipeline, we are using Github Secrets to store securely our variables.
+                                <br>
+                                Create access key and secret access key for the Gitworkflow user and store these in the Github Secrets. We are naming them AWS_ACCESS_KEY and AWS_SECRET_ACCESS_KEY. We need to store the MongoDB’s URL and password in the Github Secrets so they can be securely passed to the deployment process. We are storing and naming them MONGODB_URL and JWT_SECRET. These variable names are referenced in the applications code and in the pipeline yml codes.</p>
+
+
+                            </div>
+
+                        </div>
+
+                </div>
+            </section>
+
+           
+
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-12 col-12">
+                        <div class="copyright-text-wrap">
+                            <p class="mb-0">
+                                <span class="copyright-text">Ticorporate 2024</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/magnific-popup-options.js"></script>
+        <script src="js/custom.js"></script>
+
+    </body>
+</html>
